@@ -1,6 +1,10 @@
 #!/bin/bash
 #
 
+# This is a main script that is used by dynamic service.
+# It will try to unmount all devices from /etc/crypttab file
+# except swap, root-fs and complex mounts that cannot be detected by findmnt util
+
 timeout="30"
 
 echo_stderr () {
@@ -27,7 +31,7 @@ umount_mp ()
       (( timeleft -= 1 ))
       continue
     fi
-    echo_stderr "umount: error code $ec handling is not implemented"
+    echo_stderr "umount error code $ec handling is not implemented"
     return
   done
 }
